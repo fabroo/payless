@@ -7,15 +7,20 @@
     <link rel="stylesheet" href="./styles/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyAY9lzcIlf6rTjb9fPgoEbLgN82hYQTDxk&language=en&libraries=places"></script>
-
+    <script src="app.js"></script>
     <title>Payless</title>
 </head>
 <body>
     <div class="main-content flex">
         <p class="main-p">A dónde vamoos?</p>
         <div class="inputs">
-        <input class="main-input input" type="text" placeholder="L@ concha de tu hermana...">
-        <input class="main-btn btn"type="button" value="Viajar!">
+        <div class="flex almostFullWidth">
+        <datalist id="fromDataList"></datalist>
+        <datalist id="toDataList"></datalist>
+            <input id="from" class="main-input input" list="fromDataList" type="text" placeholder="Desde dónde">
+            <input id="to" class="main-input input" list="toDataList" type="text" placeholder="Hasta??">
+        </div>
+        <input id="calculate" class="main-btn btn"type="button" value="Viajar!">
         </div>
         <iframe class="map-iframe" width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=-58.50957870483399%2C-34.57406950494744%2C-58.42924118041993%2C-34.52748334305017&amp;layer=mapnik" style="border: 1px solid black"></iframe>
         <footer class="footer">

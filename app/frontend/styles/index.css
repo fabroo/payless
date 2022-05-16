@@ -19,24 +19,31 @@
     position: relative;
 }
 
+.almostFullWidth{
+    width: 40%;
+}
+
 .inputs{
-    width: 30%;
-    height: 40px;
+    width: 40%;
+    height: 100px;
     margin: 1.5rem auto 1rem auto;
     display: flex;
     justify-content: space-around;
 }
 .input{
-    height: 100%;
+    height: 45%;
     border-radius: 15px;
-    width: 60%;
+    width: 100%;
     border: 1px solid #ccc;
     padding: 0 20px;
     font-size: 15px;
+    margin: .3rem auto;
     font-family: 'Raleway', sans-serif;
 }
 .btn{
-    height: 100%;
+    height: 40%;
+    margin: auto 0 auto 2rem;
+    width: 150px;
     border-radius: 10px;
     border: 1px solid #ccc;
     padding: 0 20px;
@@ -60,6 +67,9 @@
     border: none !important;
     border-radius: 15px;
     margin: 1.5rem auto;
+}
+.option{
+    width: 100px !important;
 }
 .footer{
     position: absolute;
