@@ -6,9 +6,16 @@ export const didi = {
 }
 
 export const beat = {
-    requestUrl:"https://argentina.gateway.thebeat.co/service/fare/for/ride"
+    tokenFilePath:"./src/config/keys.json",
+    requestUrl:"https://argentina.gateway.thebeat.co/service/fare/for/ride",
+    authUrl: "https://hub.taxibeat.com/oauth2/token"
 }
 
 export const cabify = {
+    authUrl: `https://cabify.com/auth/api/authorization`,
     requestUrl: "https://cabify.com/api/v3/graphql"
+}
+
+export const maps = {
+    requestUrl: "https://maps.googleapis.com/maps/api"
 }
