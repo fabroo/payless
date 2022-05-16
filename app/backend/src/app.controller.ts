@@ -8,6 +8,7 @@ import {
 } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Location, LocationGroup } from './interfaces/location';
+import { RequiredPipe } from './interfaces/required-pipe';
 
 @Controller()
 export class AppController {
@@ -21,9 +22,12 @@ export class AppController {
   // }
 
   @Get('prices')
-  public getTripPrices(@Body() locations: LocationGroup) {
-    if (!locations.from || !locations.to)
-      throw new BadRequestException('Body is incorrectly formatted.');
-    return this.appService.getTripPrices(locations.from, locations.to);
+  public getTripPrices(@Query('from', new RequiredPipe()) fromId: string, @Query('to', new RequiredPipe()) toId: string) {
+    return this.appService.getTripPrices(fromId, toId);
+  }
+
+  @Get('autocomplete')
+  public autocomplete(@Query('query', new RequiredPipe()) query: string) {
+    return this.appService.autocomplete(query);
   }
 }

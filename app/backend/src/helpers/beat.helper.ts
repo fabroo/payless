@@ -10,7 +10,6 @@ export class BeatHelper {
   constructor(private http: HttpService) {}
   public async getPrice(from: Location, to: Location): Promise<number> {
     try {
-      //   const token = JSON.parse(readFileSync('./src/config/keys.json', 'utf8'));
       const token = await this.refreshToken();
       const { data } = await firstValueFrom(
         this.http.get(this.getBeatLink(from, to), {
@@ -28,14 +27,13 @@ export class BeatHelper {
 
   public async refreshToken(): Promise<number> {
     try {
-      const token = JSON.parse(readFileSync('./src/config/keys.json', 'utf8'));
       const { data } = await firstValueFrom(
         this.http.post(
-          this.getBeatAuthLink(token.username, token.password, token.device_id),
+          this.getBeatAuthLink(process.env.BEAT_USERNAME, process.env.BEAT_PASSWORD, process.env.BEAT_DEVICE_ID),
           {},
           {
             headers: {
-              authorization: `Basic: ${token.beatRefreshToken}`,
+              authorization: `Basic: ${process.env.BEAT_REFRESH_TOKEN}`,
               accept: 'application/vnd.taxibeat.v3+json'
             }
           }
@@ -43,8 +41,7 @@ export class BeatHelper {
       );
       return this.getAccessTokenFromData(data);
     } catch (error) {
-      console.log(error);
-      return 0;
+      throw new Error(error.response.statusText);
     }
   }
 
@@ -53,7 +50,7 @@ export class BeatHelper {
   };
 
   getBeatAuthLink = (username, password, device_id) => {
-    return `https://hub.taxibeat.com/oauth2/token?region=ar&grant_type=password&username=${username}&password=${password}&device_id=${device_id}`;
+    return `${beat.authUrl}?region=ar&grant_type=password&username=${username}&password=${password}&device_id=${device_id}`;
   };
 
   public getPriceFromData(data: any): number {
