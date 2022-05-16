@@ -1,6 +1,10 @@
 export interface Location {
-    lat: number,
-    lng : number
+    lat: string,
+    lng : string
+}
+
+export function asArray(location: Location) : number[] {
+    return [Number(location.lat), Number(location.lng)]
 }
 
 export interface LocationGroup {

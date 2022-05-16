@@ -19,6 +19,7 @@ export class BeatHelper {
             }))
             return this.getPriceFromData(data);
         } catch (error) {
+            console.log(error.response.statusText)
             return 0;
         }
     }

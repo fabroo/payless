@@ -8,3 +8,7 @@ export const didi = {
 export const beat = {
     requestUrl:"https://argentina.gateway.thebeat.co/service/fare/for/ride"
 }
+
+export const cabify = {
+    requestUrl: "https://cabify.com/api/v3/graphql"
+}
