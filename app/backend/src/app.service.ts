@@ -42,7 +42,6 @@ export class AppService {
 
   public async geocode(place_id:string) : Promise<Location> {
     const { data } = await firstValueFrom(this.http.get(`${maps.requestUrl}/geocode/json?place_id=${place_id}&key=${process.env.MAPS_API_KEY}`))
-    console.log(data)
     return data.results[0].geometry.location
   }
 

@@ -21,7 +21,7 @@ export class BeatHelper {
       );
       return this.getPriceFromData(data);
     } catch (error) {
-      throw new Error(error.response.statusText);
+      throw new Error(error);
     }
   }
 

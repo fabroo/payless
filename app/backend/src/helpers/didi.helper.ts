@@ -19,7 +19,7 @@ export class DidiHelper {
     }
 
     public getPriceFromJSON(json : Record<string, any>) {
-        return json.data.abilities['xEngine/passenger'].data.passenger_eyeball_estimate.data.data.estimate_data[0].items[0].car_info.price.rich.text
+        return Number(json.data.abilities['xEngine/passenger'].data.passenger_eyeball_estimate.data.data.estimate_data[0].items[0].cars_info_detail[0].car_detail[0].origin_fee.split(' ')[1])
     }
 
     public generateDidiBody(from : Location, to : Location) : any {
