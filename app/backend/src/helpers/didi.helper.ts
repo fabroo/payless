@@ -19,8 +19,6 @@ export class DidiHelper {
     }
 
     public getPriceFromJSON(json : Record<string, any>) {
-        // Solo agarra el precio del auto estándar atm
-        console.log(json.data.abilities['xEngine/passenger'])
         return json.data.abilities['xEngine/passenger'].data.passenger_eyeball_estimate.data.data.estimate_data[0].items[0].car_info.price.rich.text
     }
 
