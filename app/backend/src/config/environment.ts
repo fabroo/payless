@@ -4,3 +4,7 @@ export const didi = {
     city_id:54052300,
     requestUrl: "https://api-us.didiglobal.com/halo/v1/multi/ability/df5d5b1852dfa4a39eead7db47ed9cf9"
 }
+
+export const beat = {
+    requestUrl:"https://argentina.gateway.thebeat.co/service/fare/for/ride"
+}
