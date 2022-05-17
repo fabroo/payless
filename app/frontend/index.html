@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="app.js"></script>
+    <title>Payless</title>
+</head>
+
+<body>
+    <div class="xl:px-16 h-screen mx-auto flex flex-col items-center bg-gray-100">
+        <div class="flex flex-col mt-8 w-3/4">
+            <div class="relative">
+                <input class="border border-gray-300 rounded-xl text-sm py-2 px-3 w-full my-2 relative" placeholder="Where from?" id="from" type="text">
+            </div>
+            <div class="relative">
+                <input class="border border-gray-300 rounded-xl text-sm py-2 px-3 w-full my-2 relative" placeholder="Where to?" id="to" type="text">
+            </div>
+        </div>
+    </div>
+    <div class="absolute border-2 border-black hidden z-10 w-full bg-white" id="dropdown">
+        
+    </div>
+    
+</body>
+
+</html>
