@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -13,6 +12,12 @@ import Typography from "@mui/material/Typography";
 import Collapse from "@mui/material/Collapse";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import ContactMailIcon from "@mui/icons-material/ContactMail";
+
+import {ReactComponent as Uber} from './assets/uber.svg'
+import {ReactComponent as Didi} from './assets/didi.svg'
+import {ReactComponent as Cabify} from './assets/cabify.svg'
+import {ReactComponent as Beat} from './assets/beat.svg'
+
 function App() {
   const [optionsFrom, setOptionsFrom] = useState([]);
   const [optionsTo, setOptionsTo] = useState([]);
@@ -20,6 +25,7 @@ function App() {
   const [open, setOpen] = useState(false);
   const [dataFound, setDataFound] = useState(false);
   const [prices, setPrices] = useState({});
+  // const [prices, setPrices] = useState({didi:650, uber: 215, cabi:699, beat: 154});
   const [to, setTo] = useState("");
   const typingInterval = 1000;
 
@@ -71,6 +77,17 @@ function App() {
     return () => clearTimeout(delayDebounceFn);
   }, [to]);
 
+  const capitalizeFirst = (str) =>{
+    return str[0].toUpperCase() + str.slice(1)
+  }
+
+  const Logo = (props) =>{
+      if (props.option == 'uber') return <Uber/>
+      if (props.option == 'didi') return <Didi/>
+      if (props.option == 'beat') return <Beat/>
+      if (props.option == 'cabi') return <Cabify/>
+  }
+
   const handleClick = async () => {
     console.log({ from: optionsFrom[from], to: optionsTo[to] });
     if (!optionsFrom[from]?.id || !optionsTo[to]?.id) {
@@ -98,7 +115,6 @@ function App() {
     <div className="main-content flex">
       <Container className="main-container">
         <p className="main-p">A dónde vamoos?</p>
-
         <Autocomplete
           disablePortal
           id="combo-box-demo"
@@ -106,7 +122,7 @@ function App() {
           onInputChange={(e) => setFrom(e.target.value)}
           sx={{ width: 300 }}
           renderInput={(params) => <TextField {...params} label="Desde" />}
-        />
+          />
         <Autocomplete
           disablePortal
           id="combo-box-demo"
@@ -114,12 +130,12 @@ function App() {
           onInputChange={(e) => setTo(e.target.value)}
           sx={{ width: 300 }}
           renderInput={(params) => <TextField {...params} label="Hasta" />}
-        />
+          />
         <Button
           variant="outlined"
           className="btn"
           onClick={() => handleClick()}
-        >
+          >
           Viajar
         </Button>
 
@@ -128,14 +144,14 @@ function App() {
           onClose={() => setDataFound(!dataFound)}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
-        >
+          >
           <Box sx={style}>
             <Typography
               id="modal-modal-title"
               style={{ textAlign: "center" }}
               variant="h6"
               component="h6"
-            >
+              >
               Los precios para ir de <i>{optionsFrom[from]?.label}</i> hasta{" "}
               <i>{optionsTo[to]?.label}</i> son:
             </Typography>
@@ -145,23 +161,33 @@ function App() {
                 <>
                   <Container
                     className={"rideOption " + option[0]}
-                  >
+                    >
+                      {/* {
+                        option[0] == 'didi' ? <Didi/> : option[0] == 'beat' ? <Beat/> : option[0] == 'uber' ? <Uber/> : <Cabify/> 
+                      } */}
+                    <Typography
+                      id="modal-modal-title"
+                      variant="h6"
+                      component="h2"
+                      className="rideTitle"
+                      >
+                      {capitalizeFirst(option[0])}:{" "}
+                    </Typography>
                     <Typography
                       id="modal-modal-title"
                       variant="h6"
                       component="h2"
                       className="rideTitle"
                     >
-                      {option[0]}:{" "}
                       {option[0] == "uber" ? (
                         <i>
                           <u>Soon</u>
                         </i>
                       ) : (
-                        <b>{option[1]}</b>
+                        '$'+ option[1].toFixed(0)
                       )}
                     </Typography>
-                    {idx == 1 && (
+                    {/* {idx == 1 && (
                       <Typography
                         style={{ margin: 0, padding: 0 }}
                         className="flex"
@@ -169,7 +195,7 @@ function App() {
                         {" "}
                         <KeyboardArrowLeftIcon fontSize="medium" /> MAS BARATO{" "}
                       </Typography>
-                    )}
+                    )} */}
                   </Container>
                 </>
               );

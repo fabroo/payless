@@ -114,23 +114,27 @@
 }
 
 .rideOption{
-	margin: 1rem auto;
+	margin: .5rem auto;
 	height: 100px;
-	border-radius: 15px;
-	width: 100%;
-	display: "flex" !important;
-	flex-direction: column;
-	align-items: center !important;
-	justify-content: center;
-	text-align: center;
+	border-radius: 50px;
+	width: 90% !important;
+	display: flex !important;
+	align-items: center;
+	justify-content: space-between;
+	padding-left: 3rem !important;
+	padding-right: 2rem !important;
+}
+.rideTitle{
+	font-size: 25px !important;
+	font-family: 'Raleway', sans-serif !important;
 }
 .didi{
-	background-color:#fb6205;
+	background: linear-gradient(90deg, rgba(255,146,97,1) 0%, rgba(241,134,88,1) 35%, rgba(255,126,73,1) 100%);
 	color: #f6ebd9;
 }
 
 .beat{
-	background-color: #04dbab;
+	background: linear-gradient(90deg, rgba(48,213,174,1) 0%, rgba(36,211,171,1) 35%, rgba(67,179,174,1) 100%);
 	color: #070722;
 }	
 
@@ -139,6 +143,7 @@
 	color: #f7f7f7;
 }	
 .uber{
-	background-color: #d8d8d8;
+	background-color: #FFFFFF;
+	border: 3px solid #000000;
 	color: #040404;
 }	
