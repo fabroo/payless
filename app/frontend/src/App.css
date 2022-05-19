@@ -112,3 +112,33 @@
 	border-radius: 50%;
 	cursor: pointer;
 }
+
+.rideOption{
+	margin: 1rem auto;
+	height: 100px;
+	border-radius: 15px;
+	width: 100%;
+	display: "flex" !important;
+	flex-direction: column;
+	align-items: center !important;
+	justify-content: center;
+	text-align: center;
+}
+.didi{
+	background-color:#fb6205;
+	color: #f6ebd9;
+}
+
+.beat{
+	background-color: #04dbab;
+	color: #070722;
+}	
+
+.cabi{
+	background: radial-gradient(circle, rgba(187,65,255,1) 0%, rgba(167,68,255,1) 44%, rgba(180,116,220,1) 100%);
+	color: #f7f7f7;
+}	
+.uber{
+	background-color: #d8d8d8;
+	color: #040404;
+}	

@@ -144,17 +144,13 @@ function App() {
               return (
                 <>
                   <Container
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "start",
-                      marginLeft: "5rem",
-                    }}
+                    className={"rideOption " + option[0]}
                   >
                     <Typography
                       id="modal-modal-title"
                       variant="h6"
                       component="h2"
+                      className="rideTitle"
                     >
                       {option[0]}:{" "}
                       {option[0] == "uber" ? (
