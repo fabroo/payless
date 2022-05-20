@@ -4,3 +4,4 @@ app/backend/yarn.lock
 
 # Local Netlify folder
 .netlify
+.env
