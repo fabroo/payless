@@ -13,19 +13,19 @@ import Collapse from "@mui/material/Collapse";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import ContactMailIcon from "@mui/icons-material/ContactMail";
 
-import {ReactComponent as Uber} from './assets/uber.svg'
-import {ReactComponent as Didi} from './assets/didi.svg'
-import {ReactComponent as Cabify} from './assets/cabify.svg'
-import {ReactComponent as Beat} from './assets/beat.svg'
+import { ReactComponent as Uber } from "./assets/uber.svg";
+import { ReactComponent as Didi } from "./assets/didi.svg";
+import { ReactComponent as Cabify } from "./assets/cabi.svg";
+import { ReactComponent as Beat } from "./assets/beat.svg";
 
 function App() {
   const [optionsFrom, setOptionsFrom] = useState([]);
   const [optionsTo, setOptionsTo] = useState([]);
   const [from, setFrom] = useState("");
   const [open, setOpen] = useState(false);
-  const [dataFound, setDataFound] = useState(false);
-  const [prices, setPrices] = useState({});
-  // const [prices, setPrices] = useState({didi:650, uber: 215, cabi:699, beat: 154});
+  const [dataFound, setDataFound] = useState(true);
+  // const [prices, setPrices] = useState({});
+  const [prices, setPrices] = useState({uber: 360, cabi:400, beat: 410, didi: 480});
   const [to, setTo] = useState("");
   const typingInterval = 1000;
 
@@ -77,16 +77,16 @@ function App() {
     return () => clearTimeout(delayDebounceFn);
   }, [to]);
 
-  const capitalizeFirst = (str) =>{
-    return str[0].toUpperCase() + str.slice(1)
-  }
+  const capitalizeFirst = (str) => {
+    return str[0].toUpperCase() + str.slice(1);
+  };
 
-  const Logo = (props) =>{
-      if (props.option == 'uber') return <Uber/>
-      if (props.option == 'didi') return <Didi/>
-      if (props.option == 'beat') return <Beat/>
-      if (props.option == 'cabi') return <Cabify/>
-  }
+  const Logo = (props) => {
+    if (props.option == "uber") return <Uber />;
+    if (props.option == "didi") return <Didi />;
+    if (props.option == "beat") return <Beat />;
+    if (props.option == "cabi") return <Cabify />;
+  };
 
   const handleClick = async () => {
     console.log({ from: optionsFrom[from], to: optionsTo[to] });
@@ -98,13 +98,14 @@ function App() {
       let { data } = await axios.get(
         `http://localhost:4500/prices?from=${optionsFrom[from].id}&to=${optionsTo[to].id}`
       );
-      let objSorted = {};
-
-      Object.entries(data).forEach(function (item) {
-        objSorted[item[0]] = item[1];
+      let entries = Object.entries(data).sort(function (a, b) {
+        return a[1] - b[1];
       });
-
-      setPrices(objSorted);
+      let final = {};
+      for (let pos of entries) {
+        final[pos[0]] = pos[1];
+      }
+      setPrices(final);
       setDataFound(true);
     } catch (error) {
       setOpen(true);
@@ -114,7 +115,9 @@ function App() {
   return (
     <div className="main-content flex">
       <Container className="main-container">
-        <p className="main-p">A dónde vamoos?</p>
+        <Typography variant="h4" className="main-p">
+          A dónde vamos 🏎️
+        </Typography>
         <Autocomplete
           disablePortal
           id="combo-box-demo"
@@ -122,7 +125,7 @@ function App() {
           onInputChange={(e) => setFrom(e.target.value)}
           sx={{ width: 300 }}
           renderInput={(params) => <TextField {...params} label="Desde" />}
-          />
+        />
         <Autocomplete
           disablePortal
           id="combo-box-demo"
@@ -130,12 +133,12 @@ function App() {
           onInputChange={(e) => setTo(e.target.value)}
           sx={{ width: 300 }}
           renderInput={(params) => <TextField {...params} label="Hasta" />}
-          />
+        />
         <Button
           variant="outlined"
           className="btn"
           onClick={() => handleClick()}
-          >
+        >
           Viajar
         </Button>
 
@@ -144,58 +147,84 @@ function App() {
           onClose={() => setDataFound(!dataFound)}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
-          >
-          <Box sx={style}>
+        >
+          <Box sx={style} className="modal">
             <Typography
               id="modal-modal-title"
               style={{ textAlign: "center" }}
               variant="h6"
               component="h6"
-              >
-              Los precios para ir de <i>{optionsFrom[from]?.label}</i> hasta{" "}
-              <i>{optionsTo[to]?.label}</i> son:
+            >
+              Los precios para ir
+            </Typography>
+            <Typography
+              id="modal-modal-title"
+              style={{ textAlign: "center" }}
+              variant="h6"
+              component="h6"
+            >
+              de{" "}
+              <b>
+                <i>{optionsFrom[from]?.label}</i>
+              </b>{" "}
+            </Typography>
+            <Typography
+              id="modal-modal-title"
+              style={{ textAlign: "center" }}
+              variant="h6"
+              component="h6"
+            >
+              hasta{" "}
+              <b>
+                <i>{optionsTo[to]?.label}</i>
+              </b>
+              :
             </Typography>
             <br />
             {Object.entries(prices)?.map((option, idx) => {
               return (
                 <>
-                  <Container
-                    className={"rideOption " + option[0]}
-                    >
+                  <Container className="optionWrapper">
+                    <Container className={"rideOption " + option[0]}>
                       {/* {
                         option[0] == 'didi' ? <Didi/> : option[0] == 'beat' ? <Beat/> : option[0] == 'uber' ? <Uber/> : <Cabify/> 
                       } */}
-                    <Typography
-                      id="modal-modal-title"
-                      variant="h6"
-                      component="h2"
-                      className="rideTitle"
-                      >
-                      {capitalizeFirst(option[0])}:{" "}
-                    </Typography>
-                    <Typography
-                      id="modal-modal-title"
-                      variant="h6"
-                      component="h2"
-                      className="rideTitle"
-                    >
-                      {option[0] == "uber" ? (
-                        <i>
-                          <u>Soon</u>
-                        </i>
-                      ) : (
-                        '$'+ option[1].toFixed(0)
-                      )}
-                    </Typography>
-                    {/* {idx == 1 && (
+                    <img src={require(`./assets/${option[0]}.svg`)} />
+
                       <Typography
+                        id="modal-modal-title"
+                        variant="h6"
+                        component="h2"
+                        className="rideTitle company"
+                      >
+                        {capitalizeFirst(option[0])}:{" "}
+                      </Typography>
+                      <Typography
+                        id="modal-modal-title"
+                        variant="h6"
+                        component="h2"
+                        className="rideTitle price"
+                      >
+                        {option[0] == "uber" ? (
+                          <i>
+                            <u>Soon</u>
+                          </i>
+                        ) : (
+                          "$" + option[1].toFixed(0)
+                          )}
+                      </Typography>
+
+                      {/* {idx == 1 && (
+                        <Typography
                         style={{ margin: 0, padding: 0 }}
                         className="flex"
-                      >
+                        >
                         {" "}
                         <KeyboardArrowLeftIcon fontSize="medium" /> MAS BARATO{" "}
-                      </Typography>
-                    )} */}
+                        </Typography>
+                      )} */}
+                    </Container>
+                    
                   </Container>
                 </>
               );

@@ -34,9 +34,9 @@ export class BeatHelper {
   public async refreshToken(): Promise<number> {
     try {
       const json = JSON.parse(readFileSync(beat.tokenFilePath, 'utf8'));
-      if(!this.isExpired(json)) {
-        return json.beatJwt.token;
-      }
+      // if(!this.isExpired(json)) {
+      //   return json.beatJwt.token;
+      // }
       const { data } = await firstValueFrom(
         this.http.post(
           this.getBeatAuthLink(process.env.BEAT_USERNAME, process.env.BEAT_PASSWORD, process.env.BEAT_DEVICE_ID),

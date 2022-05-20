@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=family=Raleway:wght@100;300;400&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400&family=Raleway:wght@100;300;400&display=swap');
 * {
 	margin: 0;
 	padding: 0;
+	font-family: 'Raleway', sans-serif !important;
 }
 
 .flex {
@@ -83,6 +83,17 @@
 	width: 100px !important;
 }
 
+.optionWrapper{
+	display: flex !important;
+	align-items: center;
+}
+.cheapest{
+	position: absolute;
+	font-size: 30px !important;
+	right: 0;
+	padding-right: 1.5rem;
+}
+
 .footer {
 	position: absolute;
 	bottom: 0;
@@ -115,35 +126,143 @@
 
 .rideOption{
 	margin: .5rem auto;
-	height: 100px;
+	height: 80px;
 	border-radius: 50px;
 	width: 90% !important;
 	display: flex !important;
 	align-items: center;
-	justify-content: space-between;
-	padding-left: 3rem !important;
+	/* justify-content: space-between; */
+	padding-left: 2rem !important;
 	padding-right: 2rem !important;
+	cursor: pointer;
+	position: relative;
+}
+.company{
+	padding-left: .5rem;
+}
+.price{
+	position: absolute;
+	right: 0;
+	padding-right: 1.5rem;
+	font-family: Arial, Helvetica, sans-serif !important;
 }
 .rideTitle{
 	font-size: 25px !important;
-	font-family: 'Raleway', sans-serif !important;
 }
-.didi{
-	background: linear-gradient(90deg, rgba(255,146,97,1) 0%, rgba(241,134,88,1) 35%, rgba(255,126,73,1) 100%);
-	color: #f6ebd9;
+@property --didi3 {
+	syntax: '<color>';
+	initial-value: rgba(255,126,60,255);
+	inherits: false;
+}
+  
+@property --didi1 {
+	syntax: '<color>';
+	initial-value: #ff913c;
+	inherits: false;
+}
+@property --didi2 {
+	syntax: '<color>';
+	initial-value: #ff913c;
+	inherits: false;
 }
 
+.didi{
+	background: linear-gradient(90deg, var(--didi3) 0%, var(--didi3) 35%, var(--didi2) 100%);
+	color: #f6ebd9;
+	transition: --didi1 2s, --didi2 3s, --didi3 1s;
+}
+
+.didi:hover{
+	--didi1: rgb(224, 117, 75);
+	--didi2: rgb(228, 134, 90);
+}
+
+@property --beat1 {
+	syntax: '<color>';
+	initial-value: rgba(48,213,174,1);
+	inherits: false;
+}
+  
+@property --beat2 {
+	syntax: '<color>';
+	initial-value: rgba(36,211,171,1);
+	inherits: false;
+}
+
+@property --beat3 {
+	syntax: '<color>';
+	initial-value: rgba(67,179,174,1);
+	inherits: false;
+}
+/* .beat:hover{
+	--beat1: rgba(67,179,174,1);
+	--beat3: rgba(48,213,174,1);
+} */
 .beat{
-	background: linear-gradient(90deg, rgba(48,213,174,1) 0%, rgba(36,211,171,1) 35%, rgba(67,179,174,1) 100%);
+	background: linear-gradient(90deg, var(--beat1) 0%, var(--beat2) 35%, var(--beat3) 100%);
 	color: #070722;
-}	
+	transition: --beat1 2s, --beat2 3s, --beat3 1s;
+}		
+
+@property --cabi1 {
+	syntax: '<color>';
+	initial-value: rgba(187,65,255,1);
+	inherits: false;
+}
+  
+@property --cabi2 {
+	syntax: '<color>';
+	initial-value: rgba(167,68,255,1);
+	inherits: false;
+}
+
+@property --cabi3 {
+	syntax: '<color>';
+	initial-value: rgba(180,116,220,1);
+	inherits: false;
+}
 
 .cabi{
-	background: radial-gradient(circle, rgba(187,65,255,1) 0%, rgba(167,68,255,1) 44%, rgba(180,116,220,1) 100%);
+	background: radial-gradient(circle, var(--cabi1) 0%, var(--cabi2) 44%, var(--cabi3) 100%);
 	color: #f7f7f7;
+	transition: --cabi1 2s, --cabi2 3s, --cabi3 1s;
 }	
+
+  .cabi:hover {
+	--cabi1: rgb(174, 92, 245);
+	--cabi2: rgb(154, 88, 211);
+	--cabi3: rgb(140, 68, 202);
+  }
 .uber{
 	background-color: #FFFFFF;
 	border: 3px solid #000000;
 	color: #040404;
 }	
+.modal:focus {
+	outline: none;
+}
+
+@media only screen and (max-width: 600px) {
+	.modal{
+		width: 70% !important;
+	}
+	.rideOption{
+		height: 70px;
+		justify-content: center;
+		padding: auto 1rem;
+	}
+	.rideTitle{
+		font-size: 20px !important;
+		padding-left: .25rem;
+		padding-right: .25rem;
+	}
+	.footer{
+		width: 80%;
+		margin-bottom: 2rem;
+	}
+	.cheapest{
+		font-size: 25px !important;
+		right: 0;
+		padding-right: 1rem;
+	}
+}
