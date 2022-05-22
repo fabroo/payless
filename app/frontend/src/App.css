@@ -2,7 +2,29 @@
 * {
 	margin: 0;
 	padding: 0;
+	/* font-family: 'UberMoveBold', sans-serif !important; */
 	font-family: 'Raleway', sans-serif !important;
+}
+
+@font-face {
+	font-family: "beat";
+	src: local("GT-Pressura-Bold"),
+	url("./assets/fonts/beat/GT-Pressura-Bold.otf") format("truetype");
+}
+@font-face {
+	font-family: "didi";
+	src: local("Aspira-Wide-Bold"),
+	url("./assets/fonts/didi/Aspira-Wide-Bold.otf") format("truetype");
+}
+@font-face {
+	font-family: "cabify";
+	src: local("CabifyCircularWeb-Bold"),
+	url("./assets/fonts/cabi/CabifyCircularWeb-Bold.otf") format("truetype");
+}
+@font-face {
+	font-family: "uber";
+	src: local("UberMoveBold"),
+	url("./assets/fonts/uber/UberMoveBold.otf") format("truetype");
 }
 
 .flex {
@@ -18,7 +40,7 @@
 .main-container {
 	display: flex !important;
 	flex-direction: column;
-	height: 300px;
+	height: 350px;
 	align-items: center;
 	justify-content: space-between;
 	margin: auto;
@@ -30,7 +52,12 @@
 	font-family: 'Raleway', sans-serif;
 	position: relative;
 }
-
+.favorites{
+	font-size: 18px !important;
+	text-decoration: underline;
+	color: #636363;
+	cursor: pointer;
+}
 .almostFullWidth {
 	width: 40%;
 }
@@ -171,6 +198,39 @@
 	color: #f6ebd9;
 	transition: --didi1 2s, --didi2 3s, --didi3 1s;
 }
+.text-didi{
+	font-family: 'didi', sans-serif !important;
+}
+.text-uber{
+	font-family: 'uber', sans-serif !important;
+}
+.text-cabi{
+	font-family: 'cabify', sans-serif !important;
+	padding-top: 5px;
+}
+.text-beat{
+	font-family: 'beat', sans-serif !important;
+}
+h2{
+	margin: 0 !important;
+}
+
+.restartBtn{
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	padding-right: 1rem;
+	padding-bottom: 1rem;
+	font-size: 40px !important;
+	cursor: pointer;
+	transition: all .3s !important;
+	width: 50px;
+	height: 50px;
+}
+.restartBtn:hover {
+	transform: rotate(50deg);
+	/* font-size: 50px !important; */
+}
 
 .didi:hover{
 	--didi1: rgb(224, 117, 75);
@@ -242,27 +302,48 @@
 	outline: none;
 }
 
-@media only screen and (max-width: 600px) {
+
+.favoriteContainer{
+	height: 80px !important;
+	width: 90% !important;
+	background-color: rgb(221, 221, 221) !important;
+	border-radius: 5px;
+	display: flex !important;
+	flex-direction: column;
+	justify-content: center !important;
+	cursor: pointer;
+	transition:  all .3s !important;
+}
+
+.favoriteContainer:hover{
+	transform: scale(1.01);
+}
+.favoriteIcon{
+	cursor: pointer;
+	width: 50px !important;
+	height: 50px !important;
+	/* background-color: red; */
+	position: absolute;
+	right: 0;
+	margin-right: 1.5rem !important;
+}
+@media only screen and (max-width: 500px) {
 	.modal{
 		width: 70% !important;
 	}
 	.rideOption{
 		height: 70px;
-		justify-content: center;
-		padding: auto 1rem;
+		padding-left: 1.5rem !important;
+		width: 98% !important;
 	}
 	.rideTitle{
-		font-size: 20px !important;
-		padding-left: .25rem;
-		padding-right: .25rem;
+		font-size: 18px !important;
 	}
 	.footer{
 		width: 80%;
 		margin-bottom: 2rem;
 	}
-	.cheapest{
-		font-size: 25px !important;
-		right: 0;
-		padding-right: 1rem;
+	.company{
+		padding-left: .5rem;
 	}
 }

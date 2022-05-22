@@ -10,24 +10,26 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import Collapse from "@mui/material/Collapse";
-import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
-import ContactMailIcon from "@mui/icons-material/ContactMail";
-
-import { ReactComponent as Uber } from "./assets/uber.svg";
-import { ReactComponent as Didi } from "./assets/didi.svg";
-import { ReactComponent as Cabify } from "./assets/cabi.svg";
-import { ReactComponent as Beat } from "./assets/beat.svg";
+import RestartAltIcon from "@mui/icons-material/RestartAlt";
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+import StarIcon from '@mui/icons-material/Star';
 
 function App() {
   const [optionsFrom, setOptionsFrom] = useState([]);
   const [optionsTo, setOptionsTo] = useState([]);
-  const [from, setFrom] = useState("");
+  const [from, setFrom] = useState(0);
+  const [to, setTo] = useState(0);
   const [open, setOpen] = useState(false);
-  const [dataFound, setDataFound] = useState(true);
-  // const [prices, setPrices] = useState({});
-  const [prices, setPrices] = useState({uber: 360, cabi:400, beat: 410, didi: 480});
-  const [to, setTo] = useState("");
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("");
+  const [favoritesOpen, setFavoritesOpen] = useState(false);
+  const [dataFound, setDataFound] = useState(false);
+  const [favorites, setFavorites] = useState([]);
+  const [prices, setPrices] = useState({});
+  // const [prices, setPrices] = useState({uber: 360, cabi:400, beat: 410, didi: 480});
   const typingInterval = 1000;
+  // const base_url = "https://2a6f-200-16-122-134.ngrok.io"
+  const base_url = "http://192.168.1.125:4500";
 
   const style = {
     position: "absolute",
@@ -43,17 +45,30 @@ function App() {
     display: "flex",
     flexDirection: "column",
   };
+
+  useEffect(() => {
+    return () => {
+      let temp = JSON.parse(localStorage.getItem("favorites"));
+      if (temp) {
+        console.log(temp);
+        setFavorites(temp);
+      }
+    };
+  }, []);
+
   useEffect(() => {
     const delayDebounceFn = setTimeout(async () => {
       if (from) {
+        setLoading(true);
         const { data } = await axios.get(
-          `http://localhost:4500/autocomplete?query=${from}`
+          `${base_url}/autocomplete?query=${from}`
         );
         var options = [];
         for (let option of data) {
           options.push({ label: option.main_text, id: option.id });
         }
         setOptionsFrom(options);
+        setLoading(false)
       }
     }, typingInterval);
 
@@ -63,14 +78,16 @@ function App() {
   useEffect(() => {
     const delayDebounceFn = setTimeout(async () => {
       if (to) {
+        setLoading(true)
         const { data } = await axios.get(
-          `http://localhost:4500/autocomplete?query=${to}`
+          `${base_url}/autocomplete?query=${to}`
         );
         var options = [];
         for (let option of data) {
           options.push({ label: option.main_text, id: option.id });
         }
         setOptionsTo(options);
+        setLoading(false)
       }
     }, typingInterval);
 
@@ -81,37 +98,101 @@ function App() {
     return str[0].toUpperCase() + str.slice(1);
   };
 
-  const Logo = (props) => {
-    if (props.option == "uber") return <Uber />;
-    if (props.option == "didi") return <Didi />;
-    if (props.option == "beat") return <Beat />;
-    if (props.option == "cabi") return <Cabify />;
-  };
-
-  const handleClick = async () => {
-    console.log({ from: optionsFrom[from], to: optionsTo[to] });
-    if (!optionsFrom[from]?.id || !optionsTo[to]?.id) {
+  const handleClick = async (from, to) => {
+    console.log(from, to);
+    if (!from?.id || !to?.id) {
+      setError("parametros incompletoss");
       setOpen(true);
       return;
     }
     try {
-      let { data } = await axios.get(
-        `http://localhost:4500/prices?from=${optionsFrom[from].id}&to=${optionsTo[to].id}`
-      );
-      let entries = Object.entries(data).sort(function (a, b) {
-        return a[1] - b[1];
-      });
-      let final = {};
-      for (let pos of entries) {
-        final[pos[0]] = pos[1];
-      }
-      setPrices(final);
-      setDataFound(true);
+      setLoading(true)
+      fetch(
+        `${base_url}/prices?from=${from.id}&to=${to.id}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          let entries = Object.entries(data).sort(function (a, b) {
+            return a[1] - b[1];
+          });
+          let final = {};
+          for (let pos of entries) {
+            final[pos[0]] = pos[1];
+          }
+          setPrices(final);
+          setDataFound(true);
+          setLoading(false)
+        });
     } catch (error) {
+      setError(String(error));
       setOpen(true);
+      setTimeout(() => {
+        setOpen(false);
+        setError("");
+      }, 2000);
     }
   };
 
+  const isFavorite = (from, to) => {
+    if (favorites?.length > 0) {
+      for (let fav of favorites){
+        if(fav?.from?.id == from?.id && fav?.to?.id == to?.id){
+          return true;
+        }
+      }
+      return false;
+    }
+    return false;
+  }
+
+  const handleFavoriteList = (from, to) => {
+    let idx = 0;
+    if (favorites[0]?.from?.id == from?.id && favorites[0]?.to?.id == to?.id){
+      console.log("primer caso");
+      let newFavorites = favorites.shift();
+      setFavorites(newFavorites);
+      localStorage.setItem('favorites', JSON.stringify(newFavorites));
+      return;
+    }
+
+    if(favorites.length > 0){
+      for (let fav of favorites){
+        if(!(fav?.from?.id == from?.id && fav?.to?.id == to?.id)){
+          idx += 1
+        }
+        break
+      }
+    }
+
+    if (idx != 0){
+      let newFavorites = favorites?.splice(idx, 1)  
+      setFavorites(newFavorites);
+      localStorage.setItem('favorites', JSON.stringify(newFavorites));
+      return;
+    }
+
+    if(favorites.length > 0){
+      let newFavorites = favorites;
+      newFavorites.push([{from, to}]);
+      setFavorites(newFavorites);
+      localStorage.setItem('favorites', JSON.stringify(newFavorites))
+    }
+    else{
+      setFavorites([{from, to}]);
+      localStorage.setItem('favorites', JSON.stringify([{from, to}]))
+    }
+  }
+
+  const handleFavorite = (favorite) => {
+    setFavoritesOpen(false)
+    setOptionsFrom([favorite.from])
+    setOptionsTo([favorite.to])
+    setFrom(0)
+    setTo(0)
+    handleClick(favorite.from, favorite.to)
+  }
+  
   return (
     <div className="main-content flex">
       <Container className="main-container">
@@ -137,10 +218,19 @@ function App() {
         <Button
           variant="outlined"
           className="btn"
-          onClick={() => handleClick()}
+          onClick={() => handleClick(optionsFrom[from], optionsTo[to])}
         >
-          Viajar
+          {loading ? "..." : "Viajar"}
         </Button>
+        <Typography
+          id="modal-modal-title"
+          variant="h6"
+          component="h2"
+          className="favorites"
+          onClick={() => setFavoritesOpen(true)}
+        >
+          Revisar favoritos
+        </Typography>
 
         <Modal
           open={dataFound}
@@ -184,18 +274,18 @@ function App() {
             {Object.entries(prices)?.map((option, idx) => {
               return (
                 <>
-                  <Container className="optionWrapper">
+                  <Container className="optionWrapper" key={Math.random()*9899}>
                     <Container className={"rideOption " + option[0]}>
                       {/* {
                         option[0] == 'didi' ? <Didi/> : option[0] == 'beat' ? <Beat/> : option[0] == 'uber' ? <Uber/> : <Cabify/> 
                       } */}
-                    <img src={require(`./assets/${option[0]}.svg`)} />
+                      <img src={require(`./assets/${option[0]}.svg`)} />
 
                       <Typography
                         id="modal-modal-title"
                         variant="h6"
                         component="h2"
-                        className="rideTitle company"
+                        className={"rideTitle company text-" + option[0]}
                       >
                         {capitalizeFirst(option[0])}:{" "}
                       </Typography>
@@ -203,7 +293,7 @@ function App() {
                         id="modal-modal-title"
                         variant="h6"
                         component="h2"
-                        className="rideTitle price"
+                        className={"rideTitle price text-" + option[0]}
                       >
                         {option[0] == "uber" ? (
                           <i>
@@ -211,7 +301,7 @@ function App() {
                           </i>
                         ) : (
                           "$" + option[1].toFixed(0)
-                          )}
+                        )}
                       </Typography>
 
                       {/* {idx == 1 && (
@@ -224,11 +314,51 @@ function App() {
                         </Typography>
                       )} */}
                     </Container>
-                    
                   </Container>
                 </>
               );
             })}
+            <Container className="favoriteIcon" onClick={() => handleFavoriteList(optionsFrom[from], optionsTo[to])}>
+            {isFavorite(optionsFrom[from], optionsTo[to]) ? <StarIcon style={{fontSize:'30px'}}/> :  <StarBorderIcon style={{fontSize:'30px'}}/>}
+
+            </Container>
+            <RestartAltIcon
+              onClick={() => handleClick(optionsFrom[from], optionsTo[to])}
+              className="restartBtn"
+            />
+          </Box>
+        </Modal>
+        <Modal
+          open={favoritesOpen}
+          onClose={() => setFavoritesOpen(!favoritesOpen)}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style} className="modal">
+            <Typography
+              id="modal-modal-title"
+              style={{ textAlign: "center" }}
+              variant="h6"
+              component="h6"
+            >
+              Tus favoritos:
+            </Typography>
+            <br />
+            {favorites?.length > 0 ? (
+              favorites?.map((favorite) => {
+                return (
+                  <Container className="favoriteContainer"
+                  onClick = {() => handleFavorite(favorite)}
+                  >
+                    <Typography>Desde: {favorite?.from?.label}</Typography>
+  
+                    <Typography>Hasta: {favorite?.to?.label}</Typography>
+                  </Container>
+              ) 
+              }
+            )) : (
+              <Typography>No tenes favoritos todaviaa!</Typography>
+            )}
           </Box>
         </Modal>
       </Container>
@@ -243,7 +373,7 @@ function App() {
             setOpen(false);
           }}
         >
-          Algo malió sal
+          {error ?? "Algo malió sal"}
         </Alert>
       </Collapse>
       <footer className="footer">
