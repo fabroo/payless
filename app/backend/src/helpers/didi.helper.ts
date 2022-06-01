@@ -19,6 +19,9 @@ export class DidiHelper {
   }
 
   public getPriceFromJSON(json: Record<string, any>) {
+    console.log(json.data.abilities[
+      'xEngine/passenger'
+    ])
     const bookingFee = Number(
       json.data.abilities[
         'xEngine/passenger'
