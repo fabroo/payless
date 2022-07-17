@@ -1,0 +1,349 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400&family=Raleway:wght@100;300;400&display=swap');
+* {
+	margin: 0;
+	padding: 0;
+	/* font-family: 'UberMoveBold', sans-serif !important; */
+	font-family: 'Raleway', sans-serif !important;
+}
+
+@font-face {
+	font-family: "beat";
+	src: local("GT-Pressura-Bold"),
+	url("./assets/fonts/beat/GT-Pressura-Bold.otf") format("truetype");
+}
+@font-face {
+	font-family: "didi";
+	src: local("Aspira-Wide-Bold"),
+	url("./assets/fonts/didi/Aspira-Wide-Bold.otf") format("truetype");
+}
+@font-face {
+	font-family: "cabify";
+	src: local("CabifyCircularWeb-Bold"),
+	url("./assets/fonts/cabi/CabifyCircularWeb-Bold.otf") format("truetype");
+}
+@font-face {
+	font-family: "uber";
+	src: local("UberMoveBold"),
+	url("./assets/fonts/uber/UberMoveBold.otf") format("truetype");
+}
+
+.flex {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.main-content {
+	height: 100vh;
+}
+
+.main-container {
+	display: flex !important;
+	flex-direction: column;
+	height: 350px;
+	align-items: center;
+	justify-content: space-between;
+	margin: auto;
+	width: auto !important;
+}
+
+.main-p {
+	font-size: 36px;
+	font-family: 'Raleway', sans-serif;
+	position: relative;
+}
+.favorites{
+	font-size: 18px !important;
+	text-decoration: underline;
+	color: #636363;
+	cursor: pointer;
+}
+.almostFullWidth {
+	width: 40%;
+}
+
+.inputs {
+	width: 40%;
+	height: 100px;
+	margin: 1.5rem auto 1rem auto;
+	display: flex;
+	justify-content: space-around;
+}
+
+.input {
+	height: 45%;
+	border-radius: 15px;
+	width: 100%;
+	border: 1px solid #ccc;
+	padding: 0 20px;
+	font-size: 15px;
+	margin: .3rem auto;
+	font-family: 'Raleway', sans-serif;
+}
+
+.btn {
+	height: 20%;
+	width: 150px;
+	font-family: 'Raleway', sans-serif;
+	cursor: pointer;
+	transition: all .3s;
+}
+
+.btn:hover {
+	background-color: #ccc;
+
+}
+
+.input:focus {
+	outline: none;
+}
+
+.map-iframe {
+	width: 40%;
+	height: 50%;
+	border: none !important;
+	border-radius: 15px;
+	margin: 1.5rem auto;
+}
+
+.option {
+	width: 100px !important;
+}
+
+.optionWrapper{
+	display: flex !important;
+	align-items: center;
+}
+.cheapest{
+	position: absolute;
+	font-size: 30px !important;
+	right: 0;
+	padding-right: 1.5rem;
+}
+
+.footer {
+	position: absolute;
+	bottom: 0;
+	height: 60px;
+	font-family: 'Raleway', sans-serif;
+	color: #ccc;
+	text-align: center;
+	width: 100vw;
+}
+
+.footer-p {
+	line-height: 1.5;
+}
+
+.icons {
+	background-color: red;
+	height: 100%;
+	width: 30%;
+}
+
+.instagram-icon {
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+.rideOption{
+	margin: .5rem auto;
+	height: 80px;
+	border-radius: 50px;
+	width: 90% !important;
+	display: flex !important;
+	align-items: center;
+	/* justify-content: space-between; */
+	padding-left: 2rem !important;
+	padding-right: 2rem !important;
+	cursor: pointer;
+	position: relative;
+}
+.company{
+	padding-left: .5rem;
+}
+.price{
+	position: absolute;
+	right: 0;
+	padding-right: 1.5rem;
+	font-family: Arial, Helvetica, sans-serif !important;
+}
+.rideTitle{
+	font-size: 25px !important;
+}
+@property --didi3 {
+	syntax: '<color>';
+	initial-value: rgba(255,126,60,255);
+	inherits: false;
+}
+  
+@property --didi1 {
+	syntax: '<color>';
+	initial-value: #ff913c;
+	inherits: false;
+}
+@property --didi2 {
+	syntax: '<color>';
+	initial-value: #ff913c;
+	inherits: false;
+}
+
+.didi{
+	background: linear-gradient(90deg, var(--didi3) 0%, var(--didi3) 35%, var(--didi2) 100%);
+	color: #f6ebd9;
+	transition: --didi1 2s, --didi2 3s, --didi3 1s;
+}
+.text-didi{
+	font-family: 'didi', sans-serif !important;
+}
+.text-uber{
+	font-family: 'uber', sans-serif !important;
+}
+.text-cabi{
+	font-family: 'cabify', sans-serif !important;
+	padding-top: 5px;
+}
+.text-beat{
+	font-family: 'beat', sans-serif !important;
+}
+h2{
+	margin: 0 !important;
+}
+
+.restartBtn{
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	padding-right: 1rem;
+	padding-bottom: 1rem;
+	font-size: 40px !important;
+	cursor: pointer;
+	transition: all .3s !important;
+	width: 50px;
+	height: 50px;
+}
+.restartBtn:hover {
+	transform: rotate(50deg);
+	/* font-size: 50px !important; */
+}
+
+.didi:hover{
+	--didi1: rgb(224, 117, 75);
+	--didi2: rgb(228, 134, 90);
+}
+
+@property --beat1 {
+	syntax: '<color>';
+	initial-value: rgba(48,213,174,1);
+	inherits: false;
+}
+  
+@property --beat2 {
+	syntax: '<color>';
+	initial-value: rgba(36,211,171,1);
+	inherits: false;
+}
+
+@property --beat3 {
+	syntax: '<color>';
+	initial-value: rgba(67,179,174,1);
+	inherits: false;
+}
+/* .beat:hover{
+	--beat1: rgba(67,179,174,1);
+	--beat3: rgba(48,213,174,1);
+} */
+.beat{
+	background: linear-gradient(90deg, var(--beat1) 0%, var(--beat2) 35%, var(--beat3) 100%);
+	color: #070722;
+	transition: --beat1 2s, --beat2 3s, --beat3 1s;
+}		
+
+@property --cabi1 {
+	syntax: '<color>';
+	initial-value: rgba(187,65,255,1);
+	inherits: false;
+}
+  
+@property --cabi2 {
+	syntax: '<color>';
+	initial-value: rgba(167,68,255,1);
+	inherits: false;
+}
+
+@property --cabi3 {
+	syntax: '<color>';
+	initial-value: rgba(180,116,220,1);
+	inherits: false;
+}
+
+.cabi{
+	background: radial-gradient(circle, var(--cabi1) 0%, var(--cabi2) 44%, var(--cabi3) 100%);
+	color: #f7f7f7;
+	transition: --cabi1 2s, --cabi2 3s, --cabi3 1s;
+}	
+
+  .cabi:hover {
+	--cabi1: rgb(174, 92, 245);
+	--cabi2: rgb(154, 88, 211);
+	--cabi3: rgb(140, 68, 202);
+  }
+.uber{
+	background-color: #FFFFFF;
+	border: 3px solid #000000;
+	color: #040404;
+}	
+.modal:focus {
+	outline: none;
+}
+
+
+.favoriteContainer{
+	height: 80px !important;
+	width: 90% !important;
+	background-color: rgb(221, 221, 221) !important;
+	border-radius: 5px;
+	display: flex !important;
+	flex-direction: column;
+	justify-content: center !important;
+	cursor: pointer;
+	transition:  all .3s !important;
+}
+
+.favoriteContainer:hover{
+	transform: scale(1.01);
+}
+.favoriteIcon{
+	cursor: pointer;
+	width: 50px !important;
+	height: 50px !important;
+	/* background-color: red; */
+	position: absolute;
+	right: 0;
+	margin-right: 1.5rem !important;
+}
+@media only screen and (max-width: 500px) {
+	.modal{
+		width: 70% !important;
+	}
+	.rideOption{
+		height: 70px;
+		padding-left: 1.5rem !important;
+		width: 98% !important;
+	}
+	.rideTitle{
+		font-size: 18px !important;
+	}
+	.footer{
+		width: 80%;
+		margin-bottom: 2rem;
+	}
+	.company{
+		padding-left: .5rem;
+	}
+}
