@@ -1,6 +1,3 @@
-.ease-in {
-  -webkit-transition: .2s ease;
-  -moz-transition: .2s ease;
-  -ms-transition: .2s ease;
-  -o-transition: .2s ease;
+.ease {
+  transition: .2s ease;
 }

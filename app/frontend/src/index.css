@@ -72,6 +72,47 @@ body {
   color: #eee !important;
 }
 
+.oculto{
+  animation: hide .3s ease;
+  animation-fill-mode: forwards;
+}
+
+.mostrado{
+  animation: show .3s ease;
+  animation-fill-mode: forwards;
+}
+
+.arriba{
+  animation: arriba .3s ease;
+  animation-fill-mode: forwards;
+}
+
+.abajo{
+  animation: abajo .3s ease;
+  animation-fill-mode: forwards;
+}
+
+@keyframes hide {
+  from { opacity: 1;} 
+  to { opacity: 0;
+  }
+}
+
+@keyframes show {
+  from { opacity: 0;}
+  to { opacity: 1;}
+}
+
+@keyframes arriba {
+  from { transform: auto}
+  to { transform: translateY(-40%);}
+}
+
+@keyframes abajo {
+  from { transform: translateY(-40%)}
+  to { transform: translateY(0%);}
+}
+
 .text-ocean-blue-800 {
   color: #2E2F47 !important;
 }
