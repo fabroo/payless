@@ -30,10 +30,10 @@
 }
 
 *:focus {
-  -webkit-tap-highlight-color: transparent;
-  outline: none;
-  -ms-touch-action: manipulation;
-  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent !important;
+  outline: none !important;
+  -ms-touch-action: manipulation !important;
+  touch-action: manipulation !important;
 }
 
 body {
@@ -46,6 +46,8 @@ body {
 .font-kabel {
   font-family: 'ITC-Kabel';
 }
+
+/*----------------------- Colors -----------------------*/
 
 .bg-ocean-blue-800 {
   background-color: #2E2F47 !important;
@@ -70,6 +72,30 @@ body {
 .text-whiteish {
   color: #eee !important;
 }
+
+.text-ocean-blue-800 {
+  color: #2E2F47 !important;
+}
+
+.bg-beat {
+  background-color: #23D2AB !important;
+}
+
+.bg-cabify {
+  background-color: #7145D6 !important;
+}
+
+.bg-didi {
+  background-color: #FF7E3C !important;
+}
+
+.bg-uber {
+  background-color: #000000 !important;
+}
+
+/*----------------------------------------------*/
+
+/*----------------------- Animations -----------------------*/
 
 .oculto{
   animation: hide .3s ease;
@@ -112,54 +138,4 @@ body {
   to { transform: translateY(0%);}
 }
 
-.text-ocean-blue-800 {
-  color: #2E2F47 !important;
-}
-
-.bg-beat {
-  background-color: #23D2AB !important;
-}
-
-.bg-cabify {
-  background-color: #7145D6 !important;
-}
-
-.bg-didi {
-  background-color: #FF7E3C !important;
-}
-
-.bg-uber {
-  background-color: #000000 !important;
-}
-
-
-.ReactModal__Overlay{
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.5) !important;
-  z-index: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  transition: all 200ms ease-in-out;
-}
-
-.ReactModal__Overlay--after-open {
-  opacity: 1 !important;
-}
-
-.ReactModal__Overlay--before-close {
-  opacity: 0 !important;
-}
-
-.modalContainer{
-  width: 90%;
-  border-radius: 24px;
-  background-color: #2E2F47;
-  z-index: 2;
-  transition: opacity 2000ms ease-in-out;
-}
+/*----------------------------------------------*/

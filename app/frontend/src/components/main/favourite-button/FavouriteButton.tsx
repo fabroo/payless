@@ -1,6 +1,11 @@
 import { Heart } from "phosphor-react";
 
-export function FavouriteButton({isClicked, onClick}) {
+interface FavouriteButtonProps {
+    isClicked: boolean;
+    onClick: () => void;
+}
+
+export function FavouriteButton({isClicked, onClick} : FavouriteButtonProps) {
     return (
         <button onClick={onClick} className={"ease flex flex-row items-center px-3 py-2 rounded-3xl " + (isClicked ? 'bg-light-pink' : 'bg-ocean-blue-700')}>
             <Heart className="mx-1 ease" fill="#383951" size={20} color={isClicked ? '#383951' : '#EEE'}></Heart>

@@ -1,14 +1,20 @@
 import { Question, ArrowRight } from "phosphor-react";
 import { useEffect, useState } from "react"
 
-import { FavouriteButton } from "../favourite-button/FavouriteButton";
-import HelpModal  from "../help-modal/HelpModal";
+import { FavouriteButton } from "./favourite-button/FavouriteButton";
+import HelpModal  from "./help-modal/HelpModal";
+
 interface FocusData {
     origin: boolean;
     destination: boolean;
 }
 
-export default function InputHeader(props) {
+interface AutocompleteData {
+    main: string;
+    secondary: string;
+}
+
+export default function Main() {
     const [focused, setFocus] = useState<FocusData>({
         origin: false,
         destination: false
@@ -18,6 +24,7 @@ export default function InputHeader(props) {
     const [destinationValue, setDestinationValue] = useState<string>('')
     const [favouritesClicked, setFavouritesClicked] = useState<boolean>(false)
     const [modalOpened, setModalOpened] = useState<boolean>(false)
+    const [autocompleteValues, setAutocompleteValues] = useState<AutocompleteData[]>([])
 
     let handleFocus = (_e : any, type : string) => setFocus({
         ...focused,
@@ -32,8 +39,11 @@ export default function InputHeader(props) {
     
 
     let handleChange = (type: string, val: string) => {
-        if (val.length > 3) props.onFinishedTyping(type, val)
+        if (val.length > 3) {
+            setAutocompleteValues([{main: 'Texto', secondary: 'max texto'}, {main: 'Texto', secondary: 'max texto'},{main: 'Texto', secondary: 'max texto'}])
+        }
     }
+
 
     let clickFavourites = () => setFavouritesClicked(!favouritesClicked)
 
