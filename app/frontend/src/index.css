@@ -38,9 +38,8 @@
 
 body {
   margin: 0;
+  display: block;
   background-color: #2E2F47 !important;
-  display: flex;
-  flex-direction: column;
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -159,7 +158,6 @@ body {
 
 .modalContainer{
   width: 90%;
-  height: 50%;
   border-radius: 24px;
   background-color: #2E2F47;
   z-index: 2;

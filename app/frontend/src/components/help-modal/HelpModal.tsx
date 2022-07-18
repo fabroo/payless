@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactModal from 'react-modal'
 import { X } from 'phosphor-react'
+import cafecito_logo from '../../assets/cafecito_logo.png'
 
 export default function HelpModal(props:any) {
 
@@ -25,6 +26,11 @@ export default function HelpModal(props:any) {
                         <br/>
                         Teniendo en cuenta que algunas Aplicaciones también toman valores de cada cuenta en específico, los precios pueden fluctuar levemente.
                     </span>
+                    <button className='flex flex-row self-center w-full p-2 mt-2 rounded-xl bg-ocean-blue-700'>
+                        <img src={cafecito_logo} alt="" />
+                        <span className='pl-2 text-left text-sm leading-tight'>Te sirvio esta página?<br/>Considerá comprarnos un <span className='text-light-pink'>Cafecito</span></span>
+                    </button>
+                    
                 </div>
             </ReactModal>
         </div>
