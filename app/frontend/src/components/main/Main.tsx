@@ -1,33 +1,49 @@
 import { Question, ArrowRight } from "phosphor-react";
 import { useEffect, useState } from "react"
 
-import { FavouriteButton } from "../favourite-button/FavouriteButton";
+import { FavouriteButton } from "./favourite-button/FavouriteButton";
+import HelpModal  from "./help-modal/HelpModal";
 
-export default function InputHeader(props) {
-    const [focused, setFocus] = useState({
+interface FocusData {
+    origin: boolean;
+    destination: boolean;
+}
+
+interface AutocompleteData {
+    main: string;
+    secondary: string;
+}
+
+export default function Main() {
+    const [focused, setFocus] = useState<FocusData>({
         origin: false,
         destination: false
     }) 
-    const [animation, setAnimation] = useState(false)
-    const [originValue, setOriginValue] = useState('')
-    const [destinationValue, setDestinationValue] = useState('')
-    const [favouritesClicked, setFavouritesClicked] = useState(false)
+    const [animation, setAnimation] = useState<boolean>(false)
+    const [originValue, setOriginValue] = useState<string>('')
+    const [destinationValue, setDestinationValue] = useState<string>('')
+    const [favouritesClicked, setFavouritesClicked] = useState<boolean>(false)
+    const [modalOpened, setModalOpened] = useState<boolean>(false)
+    const [autocompleteValues, setAutocompleteValues] = useState<AutocompleteData[]>([])
 
-    let handleFocus = (e, type) => setFocus({
+    let handleFocus = (_e : any, type : string) => setFocus({
         ...focused,
         [type]: true
     })
 
-    let handleBlur = (e, type) => 
+    let handleBlur = (_e: any, type : string) => 
         setFocus({
             ...focused,
             [type]: false
         })
     
 
-    let handleChange = (type, val) => {
-        if (val.length > 3) props.onFinishedTyping(type, val)
+    let handleChange = (type: string, val: string) => {
+        if (val.length > 3) {
+            setAutocompleteValues([{main: 'Texto', secondary: 'max texto'}, {main: 'Texto', secondary: 'max texto'},{main: 'Texto', secondary: 'max texto'}])
+        }
     }
+
 
     let clickFavourites = () => setFavouritesClicked(!favouritesClicked)
 
@@ -49,9 +65,10 @@ export default function InputHeader(props) {
 
     return (
         <div className="flex flex-col">
+            <HelpModal isOpen={modalOpened} setOpen={setModalOpened} />
             <div className={"flex flex-row justify-between mt-4 " + (animation ? 'oculto' : 'mostrado')}>
                 <span className="font-kabel text-3xl text-whiteish">A donde vamos?</span>
-                <button className="text-sm text-whiteish">
+                <button className="text-sm text-whiteish" onClick={()=>setModalOpened(true)}>
                     <Question size={28} color={'#eee'}></Question>
                 </button>
             </div>
