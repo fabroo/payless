@@ -22,6 +22,13 @@ interface OptionsData {
     destination: string | null
 }
 
+interface PriceData {
+    cabi: number,
+    didi: number,
+    uber: string,
+    beat: string
+}
+
 export default function Main() {
     const [focused, setFocus] = useState<FocusData>({
         origin: false,
@@ -38,6 +45,7 @@ export default function Main() {
         origin: null,
         destination: null
     })
+    const [prices, setPrices] = useState<PriceData | null>(null)
 
     let handleFocus = (_e: any, type: string) => {
         setTimeout(()=> {
@@ -77,24 +85,20 @@ export default function Main() {
         const option = autocompleteValues.find(option => option.id === id)
         console.log(option && autocompleteType)
         if (option && autocompleteType) {
-            console.log({
-                ...selectedValues,
-                [autocompleteType]: option.id
-            })
             setSelectedValues({
                 ...selectedValues,
                 [autocompleteType]: option.id
             })
+            setPrices(null)
             autocompleteType === 'origin' ? setOriginValue(option.main_text) : setDestinationValue(option.main_text)
         }
     }
 
     let getPrices = async () => {
-        console.log(selectedValues)
         const {destination, origin} = selectedValues
         if(destination && origin) {
-            const { data } = await axios.get(`${environment.API_URL}/prices?from=${origin}&to=${destination}`)
-            console.log(data)
+            const { data } = await axios.get<PriceData>(`${environment.API_URL}/prices?from=${origin}&to=${destination}`)
+            setPrices(data)
         }
 
     }
@@ -178,6 +182,14 @@ export default function Main() {
                                 </div>
                             </div>
                         )}
+                    </div>
+                } 
+                {
+                    !isFocused() && prices && <div className="flex flex-col w-full text-white">
+                        CABI: {prices.cabi} <br />
+                        BEAT: {prices.beat} <br />
+                        UBER: {prices.uber} <br />
+                        DIDI: {prices.didi}
                     </div>
                 }
             </div>
