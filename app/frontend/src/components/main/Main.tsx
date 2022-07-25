@@ -1,33 +1,11 @@
 import { Question, ArrowRight, MapPin, Heart } from "phosphor-react";
 import { useEffect, useState } from "react"
-
 import { FavouriteButton } from "./favourite-button/FavouriteButton";
 import HelpModal from "./help-modal/HelpModal";
 import axios from 'axios'
 import environment from "../../environment/environment";
-
-interface FocusData {
-    origin: boolean;
-    destination: boolean;
-}
-
-interface AutocompleteData {
-    main_text: string;
-    secondary_text: string;
-    id: string;
-}
-
-interface OptionsData {
-    origin: string | null,
-    destination: string | null
-}
-
-interface PriceData {
-    cabi: number,
-    didi: number,
-    uber: string,
-    beat: string
-}
+import { AutocompleteData, FocusData, OptionsData, PriceData } from "../../types/interfaces";
+import { Prices } from "./prices/Prices";
 
 export default function Main() {
     const [focused, setFocus] = useState<FocusData>({
@@ -178,19 +156,14 @@ export default function Main() {
                                     <span className="text-xs" style={{color:'#CECECE'}}>{autocomplete.secondary_text}</span>
                                 </div>
                                 <div className="w-1/6 flex justify-end">
-                                    <Heart color="#CECECE"  size={28} />
+                                    <Heart color="#CECECE" size={28} />
                                 </div>
                             </div>
                         )}
                     </div>
                 } 
                 {
-                    !isFocused() && prices && <div className="flex flex-col w-full text-white">
-                        CABI: {prices.cabi} <br />
-                        BEAT: {prices.beat} <br />
-                        UBER: {prices.uber} <br />
-                        DIDI: {prices.didi}
-                    </div>
+                    !isFocused() && prices && <Prices prices={prices}></Prices>
                 }
             </div>
         </div>

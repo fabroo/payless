@@ -7,12 +7,12 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class DidiHelper {
   constructor(private http: HttpService) {}
-  public async getPrice(from: Location, to: Location): Promise<number> {
+  public async getPrice(from: Location, to: Location): Promise<string> {
     try {
       const { data } = await firstValueFrom(
         this.http.post(didi.requestUrl, this.generateDidiBody(from, to))
       );
-      return this.getPriceFromJSON(data);
+      return this.getPriceFromJSON(data).toFixed(0);
     } catch (error) {
       throw error;
     }

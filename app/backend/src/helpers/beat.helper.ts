@@ -9,7 +9,7 @@ import * as moment from 'moment';
 @Injectable()
 export class BeatHelper {
   constructor(private http: HttpService) {}
-  public async getPrice(from: Location, to: Location): Promise<number> {
+  public async getPrice(from: Location, to: Location): Promise<string> {
     try {
       const token = await this.refreshToken()
       const { data } = await firstValueFrom(
@@ -20,13 +20,13 @@ export class BeatHelper {
           }
         })
       );
-      return this.getPriceFromData(data);
+      return this.getPriceFromData(data).toFixed(0);
     } catch (error) {
       if(error.response){
         throw new Error(error.response.statusText);
       }
       console.error(error)
-      return 0
+      return "0"
     }
     
   }

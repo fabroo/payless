@@ -9,7 +9,7 @@ import { asArray, Location } from "../interfaces/location";
 @Injectable()
 export class CabifyHelper {
     constructor(private http: HttpService){}
-    public async getPrice(from: Location, to : Location) : Promise<number> {
+    public async getPrice(from: Location, to : Location) : Promise<string> {
         try {
             const token = await this.getAccessToken()
             //TODO: check if token is expired
@@ -18,10 +18,10 @@ export class CabifyHelper {
                     'Authorization': `Bearer ${token}`,
                 }
             }))
-            return data.data.estimates[0].total.amount/100
+            return (data.data.estimates[0].total.amount/100).toFixed(0)
         } catch (error) {
             console.error( error)
-            return 0;
+            return "0";
         }
     }
 

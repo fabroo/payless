@@ -4,29 +4,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
 
 @font-face {
-	font-family: "beat";
-	src: local("GT-Pressura-Bold"),
-	url("./assets/fonts/beat/GT-Pressura-Bold.otf") format("truetype");
+  font-family: 'ITC-Kabel';
+  src: local('ITC Kabel'), url('./assets/fonts/itc-kabel/ITCKabelStdMedium.TTF') format('truetype');
+  font-weight: 500;
 }
 @font-face {
-	font-family: "didi";
-	src: local("Aspira-Wide-Bold"),
-	url("./assets/fonts/didi/Aspira-Wide-Bold.otf") format("truetype");
-}
-@font-face {
-	font-family: "cabify";
-	src: local("CabifyCircularWeb-Bold"),
-	url("./assets/fonts/cabi/CabifyCircularWeb-Bold.otf") format("truetype");
-}
-@font-face {
-	font-family: "uber";
-	src: local("UberMoveBold"),
-	url("./assets/fonts/uber/UberMoveBold.otf") format("truetype");
+  font-family: 'ITC-Kabel';
+  src: local('ITC Kabel'), url('./assets/fonts/itc-kabel/ITCKabelStdDemi.TTF') format('truetype');
+  font-weight: 600;
 }
 
 @font-face {
   font-family: 'ITC-Kabel';
-  src: local('ITC Kabel'), url('./assets/fonts/itc-kabel/ITCKabelStdMedium.TTF') format('truetype');
+  src: local('ITC Kabel'), url('./assets/fonts/itc-kabel/ITCKabelStdBold.TTF') format('truetype');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'ITC-Kabel';
+  src: local('ITC Kabel'), url('./assets/fonts/itc-kabel/ITCKabelStdUltra.TTF') format('truetype');
+  font-weight: 800;
 }
 
 *:focus {
@@ -79,9 +76,10 @@ body {
 
 .bg-beat {
   background-color: #23D2AB !important;
+  
 }
 
-.bg-cabify {
+.bg-cabi {
   background-color: #7145D6 !important;
 }
 
@@ -115,6 +113,10 @@ body {
 .abajo{
   animation: abajo .3s ease;
   animation-fill-mode: forwards;
+}
+
+.ease {
+  transition: .2s ease;
 }
 
 @keyframes hide {
