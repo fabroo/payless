@@ -130,12 +130,12 @@ body {
 
 @keyframes arriba {
   from { transform: auto}
-  to { transform: translateY(-40%);}
+  to { transform: translateY(-70px);}
 }
 
 @keyframes abajo {
-  from { transform: translateY(-40%)}
-  to { transform: translateY(0%);}
+  from { transform: translateY(-70px)}
+  to { transform: translateY(0px)}
 }
 
 /*----------------------------------------------*/

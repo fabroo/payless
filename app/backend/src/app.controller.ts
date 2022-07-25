@@ -26,10 +26,6 @@ export class AppController {
     return this.appService.getTripPrices(fromId, toId);
   }
 
-  @Get('/')
-  public ping() {
-    return 'buenass';
-  }
 
   @Get('autocomplete')
   public autocomplete(@Query('query', new RequiredPipe()) query: string) {

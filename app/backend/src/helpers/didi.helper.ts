@@ -19,9 +19,6 @@ export class DidiHelper {
   }
 
   public getPriceFromJSON(json: Record<string, any>) {
-    console.log(json.data.abilities[
-      'xEngine/passenger'
-    ])
     const bookingFee = Number(
       json.data.abilities[
         'xEngine/passenger'
@@ -31,9 +28,8 @@ export class DidiHelper {
       ));
       
     const baseFare = Number(json.data.abilities['xEngine/passenger'].data.passenger_eyeball_estimate
-    .data.data.estimate_data[0].items[0].car_info.price.rich.text)
+    .data.data.estimate_data[0].items[0].car_info.price.rich.text.replace(/,/g, ''))
 
-    console.log({baseFare, bookingFee})
     return baseFare + bookingFee;
   }
 
