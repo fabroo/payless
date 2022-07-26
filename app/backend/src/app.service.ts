@@ -8,6 +8,13 @@ import { HttpService } from '@nestjs/axios';
 import { catchError, firstValueFrom, map } from 'rxjs';
 import { maps } from './config/environment';
 
+interface Prediction {
+  place_id: string,
+  structured_formatting: {
+    main_text: string,
+    secondary_text: string
+  }
+}
 @Injectable()
 export class AppService {
   constructor(
@@ -38,8 +45,8 @@ export class AppService {
   }
 
   public async autocomplete(query: string) {
-    const { data } = await firstValueFrom(this.http.get(`${maps.requestUrl}/place/autocomplete/json?input=${query}&key=${process.env.MAPS_API_KEY}&radius=1000`))
-    return data.predictions.map(pred => {
+    const { data: { predictions } } = await firstValueFrom(this.http.get(`${maps.requestUrl}/place/autocomplete/json?input=${query}&key=${process.env.MAPS_API_KEY}&radius=1000`))
+    return predictions.map((pred: Prediction) => {
       return {
         id: pred.place_id,
         main_text: pred.structured_formatting.main_text,

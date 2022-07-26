@@ -1,13 +1,9 @@
 import {
-  BadRequestException,
-  Body,
   Controller,
   Get,
-  Param,
   Query
 } from '@nestjs/common';
 import { AppService } from './app.service';
-import { Location, LocationGroup } from './interfaces/location';
 import { RequiredPipe } from './interfaces/required-pipe';
 
 @Controller()

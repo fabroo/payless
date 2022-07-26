@@ -1,4 +1,5 @@
 import { PriceData } from "../../../types/interfaces";
+import './styles.css'
 import BeatLogo from './svg/beat-logo.svg'
 import UberLogo from './svg/uber-logo.svg'
 import DidiLogo from './svg/didi-logo.svg'
@@ -10,7 +11,7 @@ interface PriceProps {
 
 export function Prices({ prices: { cabi, didi, uber, beat } }: PriceProps) {
     return (
-        <div className="flex flex-col w-full items-center mt-16 justify-center text-white">
+        <div className="flex flex-col w-full items-center mt-16 justify-center text-white prices">
 
             <div className="flex flex-row w-full mx-6">
                 <div className="rounded-2xl flex flex-col justify-center items-center bg-cabi w-1/2 mr-2 p-5 ease">

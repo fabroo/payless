@@ -1,0 +1,16 @@
+@keyframes prices {
+    from {
+        transform: translateY(-70px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+.prices {
+    animation: prices .5s ease;
+    animation-fill-mode: forwards;
+}
